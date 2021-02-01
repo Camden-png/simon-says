@@ -1,4 +1,4 @@
-# Simon Says
+# Simon Says - WIP
 
 ## Synopsis:
 This is a Discord bot minigame written in Python to simulate the childhood game of Simon says... but with a twist!  
