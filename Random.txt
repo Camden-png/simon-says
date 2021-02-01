@@ -1,0 +1,21 @@
+cat face
+dog face
+apple
+eyes
+zoom
+twitch
+discord
+metagame
+videogame
+controller
+davis
+college
+university
+hotrod
+racecar
+teacher
+professor
+final
+midterm
+alphabet
+assignment
