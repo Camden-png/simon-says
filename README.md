@@ -1,12 +1,13 @@
-# Simon Says - WIP
+# Simon Says
 
 ## Synopsis:
 This is a Discord bot minigame written in Python to simulate the childhood game of Simon says... but with a twist!  
 Instead of touching your noise... you write words, descramble words, send emoticons, and more for points!
 
 ## Requirements:
-* [Python 3.0+](https://www.python.org/)
+* [Python 3.6+](https://www.python.org/)
 * [Discord Library](https://pypi.org/project/discord.py/) - *pip install discord*
+* On [Windows](https://www.codegrepper.com/code-examples/whatever/discord+ssl+certificate+error) and [Mac](https://pastebin.com/8Cs0C8c4) install a Discord Certificate
 
 ## Usage:
 * Put your Discord bot token into Token.txt
@@ -14,7 +15,5 @@ Instead of touching your noise... you write words, descramble words, send emotic
 
 ## Support:
 * Windows :heavy_check_mark:
-* Linux: :question:
-* Mac: :question:
-
-Linux and Mac compatibility will be tested soon...
+* Linux: :heavy_check_mark:
+* Mac: :heavy_check_mark:
