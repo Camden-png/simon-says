@@ -7,7 +7,7 @@ logo = """
 instructions = """Commands:
 • !simon score all - check all scores
 • !simon score me - check your score
-• !simon score name - check other players' score"""
+• !simon score name - check other player scores"""
 
 import os
 import sys
