@@ -25,7 +25,7 @@ except ImportError:
     print("Error: no Discord library found!")
     sys.exit(1)
 
-wait = 0.5
+wait = 30
 word = ""
 words = []
 taken = []
