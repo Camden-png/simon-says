@@ -12,7 +12,8 @@ By default, a new prompt occurs every hour. Enjoy!
 
 ## Usage:
 * Put your Discord bot token into Token.txt
-* Add more words to Random.txt to be selected from (optional)
+* Optionally add more words to Random.txt to be selected from
+* In your terminal: *python Simon.py (optional duration)*
 
 ## Example:
 ![](Images/Example.png)
