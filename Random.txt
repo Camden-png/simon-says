@@ -1,7 +1,5 @@
-cat face
-dog face
-apple
-eyes
+\U0001f600
+\U0001f4af
 zoom
 twitch
 discord
