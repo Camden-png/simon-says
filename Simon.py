@@ -115,9 +115,9 @@ async def play():
             string = ""
             if mode != "meme":
                 emoji = word = word.upper()
-                emoji = emoji.encode("unicode-escape").decode("ascii")
-                if "\\" in emoji:
-                    string = f"Simon says emote {word}"
+                emoji = emoji.encode().decode("unicode-escape")
+                if "\\" in word:
+                    string = f"Simon says emote {emoji}"
                 elif mode == "write":
                     string = f"Simon says write *{word}*"
                 else:
