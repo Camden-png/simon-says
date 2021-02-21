@@ -202,7 +202,7 @@ async def on_reaction_add(reaction, user):
         and reaction.message in votes):
             message = reaction.message
             react = get(message.reactions, emoji = reaction.emoji)
-            if react and react.count >= 2:
+            if react and react.count >= 10:
                 votes.remove(message)
                 await update_scores(message.author, 20)
                 await message.add_reaction("\U0001f31f")
