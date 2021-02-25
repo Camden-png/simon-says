@@ -5,6 +5,7 @@ logo = """
 |/__\|/__\|/__\|/__\|/__\|/_______\|/__\|/__\|/__\|/__\|"""
 
 instructions = """Commands:
+• !simon help - repeat this message
 • !simon score all - check all scores
 • !simon score me - check your score
 • !simon score <player> - check another player's score"""
@@ -105,8 +106,8 @@ async def play():
         string = ""
         delay = 60 * wait
         mode = random.choice(order)
-        if random.random() < 0.2: mode = "vote"
-        if random.random() < 0.2: mode = "meme"
+        if random.random() < 0.1: mode = "vote"
+        if random.random() < 0.1: mode = "meme"
         file = open("Random.txt", "r")
         lines = file.read().splitlines()
         file.close()
@@ -194,13 +195,16 @@ async def update_scores(author, won):
 
 @bot.event
 async def on_reaction_add(reaction, user):
-    global word, votes, special
+    global word, trick, votes, special
     if user != bot.user:
-        if special == reaction.message:
-            if reaction.emoji == word: await update_scores(user, 10)
+        message = reaction.message
+        if special == message:
+            plain = reaction.emoji.encode("unicode-escape").decode("ascii").upper()
+            if plain == word:
+                if not trick: await update_scores(user, 10)
+                else: await update_scores(user, -5)
         elif (word == "vote suggestions" and reaction.emoji == "\u2705"
-        and reaction.message in votes):
-            message = reaction.message
+        and message in votes):
             react = get(message.reactions, emoji = reaction.emoji)
             if react and react.count >= 10:
                 votes.remove(message)
@@ -218,8 +222,8 @@ async def simon(ctx, *arg):
     global channel, instructions
     message = ctx.message
     author = message.author
-    if message.channel == channel:
-        if arg[0] == "help" and len(arg) == 1:
+    if message.channel == channel or not message.guild:
+        if len(arg) == 0 or (arg[0] == "help" and len(arg) == 1):
             await printer(author, instructions)
         elif arg[0] == "score" and len(arg) <= 2:
             mode = ""
@@ -251,7 +255,7 @@ async def on_message(message):
         else:
             await printer(author, "Invalid format!")
             await message.delete()
-    elif author == bot.user: special = message
+    elif author == bot.user and message.guild: special = message
     await bot.process_commands(message)
 
 sys.exit(main())
