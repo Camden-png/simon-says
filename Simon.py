@@ -115,10 +115,9 @@ async def play():
         if mode in order or mode == "meme":
             string = ""
             if mode != "meme":
-                emoji = word = word.upper()
-                emoji = emoji.encode().decode("unicode-escape")
                 if "\\" in word:
-                    string = f"Simon says emote {emoji}"
+                    word = word.encode().decode("unicode-escape")
+                    string = f"Simon says emote {word}"
                 elif mode == "write":
                     string = f"Simon says write *{word}*"
                 else:
@@ -128,7 +127,8 @@ async def play():
                     string = f"Simon says descramble *{shuffled}*"
             else: word = "send a meme"; string = f"Simon says {word}!"
             if random.random() < 0.2:
-                string = string.replace("Simon says ", "").capitalize()
+                string = string.replace("Simon says ", "")
+                string = string[0].capitalize() + string[1:]
                 trick = True
             await printer(channel, string)
         else:
@@ -198,15 +198,13 @@ async def on_reaction_add(reaction, user):
     global word, trick, votes, special
     if user != bot.user:
         message = reaction.message
-        if special == message:
-            plain = reaction.emoji.encode("unicode-escape").decode("ascii").upper()
-            if plain == word:
-                if not trick: await update_scores(user, 10)
-                else: await update_scores(user, -5)
+        if special == message and reaction.emoji == word:
+            if not trick: await update_scores(user, 10)
+            else: await update_scores(user, -5)
         elif (word == "vote suggestions" and reaction.emoji == "\u2705"
         and message in votes):
             react = get(message.reactions, emoji = reaction.emoji)
-            if react and react.count >= 10:
+            if react and react.count >= 2: # NOTE
                 votes.remove(message)
                 await update_scores(message.author, 20)
                 await message.add_reaction("\U0001f31f")
