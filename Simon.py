@@ -204,7 +204,7 @@ async def on_reaction_add(reaction, user):
         elif (word == "vote suggestions" and reaction.emoji == "\u2705"
         and message in votes):
             react = get(message.reactions, emoji = reaction.emoji)
-            if react and react.count >= 2: # NOTE
+            if react and react.count >= 10:
                 votes.remove(message)
                 await update_scores(message.author, 20)
                 await message.add_reaction("\U0001f31f")
@@ -223,7 +223,7 @@ async def simon(ctx, *arg):
     if message.channel == channel or not message.guild:
         if len(arg) == 0 or (arg[0] == "help" and len(arg) == 1):
             await printer(author, instructions)
-        elif arg[0] == "score" and len(arg) <= 10:
+        elif arg[0] == "score" and len(arg) <= 2:
             mode = ""
             if len(arg) == 2: mode = arg[1].lower()
             if len(arg) == 1 or mode == "me":
