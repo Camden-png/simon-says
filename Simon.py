@@ -223,7 +223,7 @@ async def simon(ctx, *arg):
     if message.channel == channel or not message.guild:
         if len(arg) == 0 or (arg[0] == "help" and len(arg) == 1):
             await printer(author, instructions)
-        elif arg[0] == "score" and len(arg) <= 2:
+        elif arg[0] == "score" and len(arg) <= 10:
             mode = ""
             if len(arg) == 2: mode = arg[1].lower()
             if len(arg) == 1 or mode == "me":
