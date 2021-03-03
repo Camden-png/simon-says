@@ -106,8 +106,8 @@ async def play():
         string = ""
         delay = 60 * wait
         mode = random.choice(order)
-        if random.random() < 0.1: mode = "vote"
-        if random.random() < 0.1: mode = "meme"
+        if random.random() < 0.15: mode = "vote"
+        if random.random() < 0.15: mode = "meme"
         file = open("Random.txt", "r")
         lines = file.read().splitlines()
         file.close()
@@ -186,10 +186,16 @@ async def update_scores(author, won):
     global taken
     id = author.id
     if id not in taken:
-        taken.append(id)
+        string = ""
         total = await sort_scores(id, won)
-        string = f"Congrats! You won *{won}* points. You now have *{total}* points total."
-        if won < 0: string = f"I did not say 'Simon says' so you lost *{abs(won)}* points. You now have *{total}* points total."
+        if won > 0:
+            if taken:
+                string = f"Congrats! You won *{won}* points. You now have *{total}* points total."
+            else:
+                won += 10
+                string = f"Woah! You won first so you get *{won}* points. You now have *{total}* points total."
+        else: string = f"I did not say 'Simon says' so you lost *{abs(won)}* points. You now have *{total}* points total."
+        taken.append(id)
         await printer(author, string)
     else: await printer(author, f"You already got your points!")
 
@@ -238,7 +244,10 @@ async def simon(ctx, *arg):
 async def on_message(message):
     global word, votes, trick, special, channel
     author = message.author
-    raw = message.content.upper()
+    raw = message.content
+    raw = raw.replace("_", "").replace("*", "")
+    raw = raw.replace("|", "").replace("/spoiler message:", "")
+    raw = raw.upper()
     if author != bot.user and message.channel == channel and "!" not in raw:
         plain = raw.encode("unicode-escape").decode("ascii")
         if word != "vote suggestions":
