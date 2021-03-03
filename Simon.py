@@ -146,14 +146,14 @@ async def sort_scores(id, points = 0):
     new = points
     found = False
     for i in range(0, len(lines)):
-        line = lines[i].split("-")
+        line = lines[i].split("|")
         if id == int(line[0]):
             new = int(line[1]) + points
-            lines[i] = f"{line[0]}-{new}"
+            lines[i] = f"{line[0]}|{new}"
             found = True; break
-        else: lines[i] = lines[i] = "-".join(line)
-    if not found: lines.append(f"{id}-{points}")
-    lines = sorted(lines, key = lambda line: int(line.split("-")[1]), reverse = True)
+        else: lines[i] = lines[i] = "|".join(line)
+    if not found: lines.append(f"{id}|{points}")
+    lines = sorted(lines, key = lambda line: int(line.split("|")[1]), reverse = True)
     file = open(name, "w")
     file.write("\n".join(lines))
     file.close()
@@ -167,7 +167,7 @@ async def check_scores(ctx, arg, mode):
     lines = file.read().splitlines()
     file.close()
     for i in range(0, len(lines)):
-        line = lines[i].split("-")
+        line = lines[i].split("|")
         id = int(line[0])
         name = await bot.fetch_user(id)
         name = str(name.name).lower()
