@@ -188,14 +188,16 @@ async def update_scores(author, won):
     id = author.id
     if id not in taken:
         string = ""
-        total = await sort_scores(id, won)
-        if won > 0:
-            if taken:
+        if taken or won < 0:
+            total = await sort_scores(id, won)
+            if won > 0:
                 string = f"Congrats! You won *{won}* points. You now have *{total}* points total."
             else:
-                won += 10
-                string = f"Woah! You won first so you get *{won}* points. You now have *{total}* points total."
-        else: string = f"I did not say 'Simon says' so you lost *{abs(won)}* points. You now have *{total}* points total."
+                string = f"I did not say 'Simon says' so you lost *{abs(won)}* points. You now have *{total}* points total."
+        elif not taken:
+            won += 10
+            total = await sort_scores(id, won)
+            string = f"Woah! You won first so you get *{won}* points. You now have *{total}* points total."
         taken.append(id)
         await printer(author, string)
     else: await printer(author, f"You already got your points!")
