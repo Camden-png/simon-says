@@ -1,5 +1,10 @@
+\u2728
 \U0001f600
 \U0001f4af
+\U0001f419
+\U0001f347
+\U0001f42e
+\U0001f436
 zoom
 twitch
 discord
@@ -17,3 +22,5 @@ final
 midterm
 alphabet
 assignment
+robot
+dinosaur

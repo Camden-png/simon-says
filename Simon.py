@@ -111,12 +111,13 @@ async def play():
         file = open("Random.txt", "r")
         lines = file.read().splitlines()
         file.close()
-        word = random.choice(lines).upper()
+        temp = word = random.choice(lines)
+        word = word.upper()
         if mode in order or mode == "meme":
             string = ""
             if mode != "meme":
                 if "\\" in word:
-                    word = word.encode().decode("unicode-escape")
+                    word = temp.encode().decode("unicode-escape")
                     string = f"Simon says emote {word}"
                 elif mode == "write":
                     string = f"Simon says write *{word}*"
@@ -210,7 +211,7 @@ async def on_reaction_add(reaction, user):
         elif (word == "vote suggestions" and reaction.emoji == "\u2705"
         and message in votes):
             react = get(message.reactions, emoji = reaction.emoji)
-            if react and react.count >= 10:
+            if react and react.count >= 5:
                 votes.remove(message)
                 await update_scores(message.author, 20)
                 await message.add_reaction("\U0001f31f")
@@ -259,9 +260,6 @@ async def on_message(message):
         elif plain.isascii() and " " not in plain and plain.count("\\") <= 1:
             votes.append(message)
             await message.add_reaction("\u2705")
-        else:
-            await printer(author, "Invalid format!")
-            await message.delete()
     elif author == bot.user and message.guild: special = message
     await bot.process_commands(message)
 
