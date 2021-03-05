@@ -259,7 +259,8 @@ async def on_message(message):
             elif raw == word: won = 10
             if won != 0 and trick: won = -5
             if won != 0: await update_scores(author, won)
-        elif plain.isascii() and " " not in plain and plain.count("\\") <= 1:
+        elif (plain.isascii() and " " not in plain and plain.count("\\") <= 1
+        and not message.attachments):
             votes.append(message)
             await message.add_reaction("\u2705")
     elif author == bot.user and message.guild: special = message
