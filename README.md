@@ -5,6 +5,11 @@ This is a Discord bot minigame written in Python to simulate the childhood game 
 Instead of touching your noise... you write words, descramble words, send emoticons, and more for points!  
 By default, a new prompt occurs every hour. Enjoy!
 
+## Special Thanks:
+* Professor LeMieux for supporting this strange idea.
+* Everybody who played and messed around with my game.
+* Sage Zimmerman for ranking as the *Number One* play-tester!
+
 ## Requirements:
 * [Python 3.6+](https://www.python.org/)
 * [Discord Library](https://pypi.org/project/discord.py/) - *pip install discord*
