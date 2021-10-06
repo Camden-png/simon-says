@@ -3,7 +3,10 @@
 ## Synopsis:
 This is a Discord bot minigame written in Python to simulate the childhood game of Simon says... but with a twist!  
 Instead of touching your noise... you write words, descramble words, send emoticons, and more for points!  
-By default, a new prompt occurs every hour. Enjoy!
+By default, a new prompt occurs every hour. Enjoy! Completed in CDM-198.
+
+## Example Video:
+[YouTube demonstration](https://youtu.be/RbavAC5LDEk)
 
 ## Special Thanks:
 * Professor LeMieux for supporting this strange idea.
